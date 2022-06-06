@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
-
+const bookSchema = new mongoose.Schema(
+    {
+        BookName: String,
+        AuthorName: String,
+        Year: Number,
+        Category: String
+    }, {timestamps: true}
+);
 const userSchema = new mongoose.Schema( {
     firstName: String,
     lastName: String,
@@ -24,7 +31,7 @@ const userSchema = new mongoose.Schema( {
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema) //users
-
+module.exports = mongoose.model('Book', bookSchema) //books
 
 
 // String, Number
