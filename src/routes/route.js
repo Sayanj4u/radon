@@ -8,16 +8,18 @@ const commonMW = require ("../middlewares/commonMiddlewares")
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
-
-
+//
+const customerController= require("../controllers/customerController")
+router.post("/createUser",commonMW.midW, customerController.createUser)
+const productController= require("../controllers/productController")
+router.post("/createProduct", productController.createProduct)
+const orderController= require("../controllers/orderController")
+router.post("/createOrder", commonMW.midX, orderController.createOrder)
 
 
 router.post("/createBook", BookController.createBook  )
-
-
-
-
 router.post("/createUser", UserController.createUser)
+
 // router.get("/getUsersData", UserController.getUsersData)
 
 
