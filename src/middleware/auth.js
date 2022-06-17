@@ -3,10 +3,10 @@ const authenticate = function(req, res, next) {
        //check the token in equest header
        //validate this token
        let token = req.headers["x-auth-token"]
-    if(!token) return res.send({status: false, msg: "token must be present in the request header"})
+    if(!token) return res.status(401).send({status: false, msg: "token must be present in the request header"})
     let decodedToken = jwt.verify(token, 'functionup-thorium')
 
-    if(!decodedToken) return res.send({status: false, msg:"token is not valid"})
+    if(!decodedToken) return res.status(401).send({status: false, msg:"token is not valid"})
     
 
 next()
@@ -23,7 +23,7 @@ const authorise = function (req,res, next) {
 
   //
   if(userToBeModified != userLoggedIn)
-  return res.send({status: true, msg: "user logged in is not allowed to modify the requested data"})
+  return res.status(403).send({status: true, msg: "user logged in is not allowed to modify the requested data"})
   next()
 }
 

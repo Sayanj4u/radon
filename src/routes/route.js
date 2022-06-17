@@ -18,7 +18,7 @@ router.get("/users/:userId",auth.authenticate, auth.authorise, userController.ge
 
 router.put("/users/:userId",auth.authenticate,auth.authorise, userController.updateUser)
 // router.delete('/users/:userId',auth.authenticate, userController.deleteUser)
-router.post('/users/:userId/posts',auth.authenticate,auth.authorise, userController.postMessage)
+router.post('/users/:userId/posts', userController.postMessage)
 
 module.exports = router;
 // module.exports= nodemon;
