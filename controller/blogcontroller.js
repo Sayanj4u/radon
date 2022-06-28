@@ -301,6 +301,19 @@ const deleteByQuery = async function(req, res) {
         if (data.length == 0) {
             return res.status(404).send({ status: false, message: "no such data exists" })
         }
+        let blogId = req.params.blogId;
+        let authorIdFromToken = req.authorId;
+        let Blog = await blogModel.findOne({ _id: blogId });
+        if (Blog.authorId.toString() !== authorIdFromToken) {
+            res.status(401).send({
+                status: false,
+                message: `Unauthorized access! author's info doesn't match`,
+            });
+            return;
+        };
+
+     
+
         let Update = await blogModel.updateMany({ $or: [{ category: category }, { authorId: authorId }, { tags: tags }, { subcategory: subcategory }, { isPublished: isPublished }] }, { $set: { isDeleted: true } }, { new: true })
         res.send({ status: true, data: Update })
     } catch (err) {
